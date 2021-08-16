@@ -12,7 +12,9 @@ class Home extends StatelessWidget {
     return MaterialApp(
         home: Scaffold(
             appBar: AppBar(
-              title: Text(Variables.appTitle),
+              title: Text(
+                Variables.appTitle,
+                style: TextStyle(fontFamily: 'Folkard'),),
               flexibleSpace: Image(
                 image: AssetImage(Variables.appBarImage),
                 fit: BoxFit.cover,
