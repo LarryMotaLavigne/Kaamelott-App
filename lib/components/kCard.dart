@@ -1,8 +1,10 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 
 class KCard extends StatelessWidget {
   var data;
   final int index;
+  AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
 
   KCard(this.data, this.index);
 
@@ -41,9 +43,7 @@ class KCard extends StatelessWidget {
                             ],
                           ),
                           Row(
-                            children: <Widget>[
-                              playButton(data[index])
-                            ],
+                            children: <Widget>[playButton(data[index])],
                           )
                         ],
                       ))
@@ -89,59 +89,27 @@ class KCard extends StatelessWidget {
     );
   }
 
-  Widget cryptoChange(data) {
-    return Align(
-      alignment: Alignment.topRight,
-      child: RichText(
-        text: TextSpan(
-          text: '${data['change']}',
-          style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.green, fontSize: 20),
-          children: <TextSpan>[
-            TextSpan(
-                text: '\n${data['changeValue']}',
-                style: TextStyle(
-                    color: data['changeColor'],
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold)),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget changeIcon(data) {
-    return Align(
-        alignment: Alignment.topRight,
-        child: data['change'].contains('-')
-            ? Icon(
-                Icons.arrow_back_ios_rounded,
-                color: data['changeColor'],
-                size: 30,
-              )
-            : Icon(
-                Icons.arrow_forward_ios_rounded,
-                color: data['changeColor'],
-                size: 30,
-              ));
-  }
-
   Widget playButton(data) {
     return Align(
       alignment: Alignment.centerLeft,
       child: Padding(
-        padding: const EdgeInsets.only(left: 20.0),
+        padding: const EdgeInsets.all(40.0),
         child: Row(
           children: <Widget>[
-            RichText(
-              textAlign: TextAlign.left,
-              text: TextSpan(
-                text: '\n${data['file']}',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 35,
-                ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(), padding: EdgeInsets.all(15)),
+              child: Icon(
+                Icons.play_arrow,
+                size: 30,
               ),
+              onPressed: () {
+                audioPlayer.open(
+                  Audio("assets/audios/interprete.mp3"),
+                  showNotification: true,
+                  autoStart: true,
+                );
+              },
             ),
           ],
         ),
