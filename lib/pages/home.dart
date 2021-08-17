@@ -28,17 +28,22 @@ class Home extends StatelessWidget {
                   Expanded(
                     child: FutureBuilder(
                       future: Loader().loadJson(),
-                      builder: (_, projectSnap) {
-                        return ListView.builder(
-                            itemCount: projectSnap.data.length,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                                height: 220,
-                                width: double.maxFinite,
-                                child: KCard(projectSnap.data, index),
-                              );
-                            });
+                      builder: (_, snapshot) {
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                  height: 220,
+                                  width: double.maxFinite,
+                                  child: KCard(snapshot.data, index),
+                                );
+                              });
+                        }
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
                       },
                     ),
                   ),
