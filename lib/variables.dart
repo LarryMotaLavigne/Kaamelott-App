@@ -5,4 +5,6 @@ class Variables {
   static const String appBarImage = 'assets/sword.png';
 
   static var appBarColor = Colors.brown;
+
+  static String assetsData = 'assets/sounds/sounds.json';
 }

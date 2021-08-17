@@ -1,6 +1,10 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class Data {
+import 'package:K/variables.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+class Loader {
   static final getData = [
     {
       'character': 'Arthur - Le Roi Burgonde',
@@ -10,4 +14,9 @@ class Data {
       'icon': Icons.account_balance,
     },
   ];
+
+  loadJson() async {
+    String data = await rootBundle.loadString(Variables.assetsData);
+    return json.decode(data);
+  }
 }
