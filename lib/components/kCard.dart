@@ -1,10 +1,11 @@
+import 'package:K/components/playPauseButton.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 
 class KCard extends StatelessWidget {
   var data;
   final int index;
-  AssetsAudioPlayer audioPlayer = AssetsAudioPlayer();
+  final AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId("0");
 
   KCard(this.data, this.index);
 
@@ -43,7 +44,9 @@ class KCard extends StatelessWidget {
                             ],
                           ),
                           Row(
-                            children: <Widget>[playButton(data[index])],
+                            children: <Widget>[
+                              PlayPauseButton(mp3name: data[index]['file'])
+                            ],
                           )
                         ],
                       ))
@@ -83,34 +86,6 @@ class KCard extends StatelessWidget {
                     color: Colors.grey,
                     fontSize: 15,
                     fontWeight: FontWeight.bold)),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget playButton(data) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Padding(
-        padding: const EdgeInsets.all(40.0),
-        child: Row(
-          children: <Widget>[
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  shape: CircleBorder(), padding: EdgeInsets.all(15)),
-              child: Icon(
-                Icons.play_arrow,
-                size: 30,
-              ),
-              onPressed: () {
-                audioPlayer.open(
-                  Audio("assets/audios/interprete.mp3"),
-                  showNotification: true,
-                  autoStart: true,
-                );
-              },
-            ),
           ],
         ),
       ),
