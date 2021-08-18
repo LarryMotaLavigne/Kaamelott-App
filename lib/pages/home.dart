@@ -1,5 +1,5 @@
 import 'package:K/components/kCard.dart';
-import 'package:K/data.dart';
+import 'package:K/loader.dart';
 import 'package:K/variables.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
