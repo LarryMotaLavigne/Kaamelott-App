@@ -38,6 +38,7 @@ flutter:
   assets:
     - assets/
     - assets/sounds/
+    - assets/characters/
   fonts:
     - family: Folkard
       fonts:

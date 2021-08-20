@@ -1,10 +1,13 @@
 import 'package:K/components/kCard.dart';
 import 'package:K/loader.dart';
 import 'package:K/variables.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
+  final audioPlayer = AssetsAudioPlayer.withId(Variables.appTitle);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,7 +40,7 @@ class Home extends StatelessWidget {
                                   padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                                   height: 220,
                                   width: double.maxFinite,
-                                  child: KCard(snapshot.data, index),
+                                  child: KCard(snapshot.data, index, audioPlayer),
                                 );
                               });
                         }

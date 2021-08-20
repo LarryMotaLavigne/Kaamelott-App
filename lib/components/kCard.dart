@@ -1,13 +1,12 @@
 import 'package:K/components/playPauseButton.dart';
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 
 class KCard extends StatelessWidget {
   var data;
   final int index;
-  final AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId("0");
+  final audioPlayer;
 
-  KCard(this.data, this.index);
+  KCard(this.data, this.index, this.audioPlayer);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,9 @@ class KCard extends StatelessWidget {
                           ),
                           Row(
                             children: <Widget>[
-                              PlayPauseButton(mp3name: data[index]['file'])
+                              PlayPauseButton(
+                                  mp3name: data[index]['file'],
+                                  audioPlayer: audioPlayer)
                             ],
                           )
                         ],
@@ -60,15 +61,31 @@ class KCard extends StatelessWidget {
   }
 
   Widget characterIcon(data) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 15.0),
-      child: Align(
-          alignment: Alignment.centerLeft,
-          child: Icon(
-            Icons.person,
-            size: 40,
-          )),
-    );
+    String name = data['character'].split(' ')[0].toLowerCase();
+    if ([
+      'merlin',
+      'arthur'
+    ].contains(name)) {
+      return Padding(
+        padding: const EdgeInsets.only(left: 15.0),
+        child: Align(
+            alignment: Alignment.centerLeft,
+            child: Image.asset(
+              "assets/characters/$name.png",
+              width: 40,
+            )),
+      );
+    }else{
+      return Padding(
+        padding: const EdgeInsets.only(left: 15.0),
+        child: Align(
+            alignment: Alignment.centerLeft,
+            child: Icon(
+              Icons.person,
+              size: 40,
+            )),
+      );
+    }
   }
 
   Widget characterName(data) {
