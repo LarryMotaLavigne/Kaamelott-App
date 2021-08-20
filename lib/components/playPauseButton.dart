@@ -12,7 +12,7 @@ class PlayPauseButton extends StatefulWidget {
 }
 
 class _PlayPauseButtonState extends State<PlayPauseButton> {
-  bool isPressed = false;
+  bool _play = false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,26 +22,27 @@ class _PlayPauseButtonState extends State<PlayPauseButton> {
         padding: const EdgeInsets.all(40.0),
         child: Row(
           children: <Widget>[
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  shape: CircleBorder(), padding: EdgeInsets.all(15)),
-              child: Icon(
-                isPressed ? Icons.pause : Icons.play_arrow,
-                size: 30,
-              ),
-              onPressed: () {
-                setState(() {
-                  if (!isPressed) {
-                    widget.audioPlayer.open(
-                        Audio("assets/sounds/${widget.mp3name}"));
-                    isPressed = true;
-                  } else if (isPressed) {
-                    widget.audioPlayer.pause();
-                    isPressed = false;
-                  }
-                });
-              },
-            ),
+            AudioWidget.assets(
+                path: 'assets/sounds/${widget.mp3name}',
+                play: _play,
+                onFinished: () {
+                  setState(() {
+                    _play = false;
+                  });
+                },
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shape: CircleBorder(), padding: EdgeInsets.all(15)),
+                  child: Icon(
+                    _play ? Icons.stop : Icons.play_arrow_rounded,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _play = !_play;
+                    });
+                  },
+                )),
           ],
         ),
       ),
