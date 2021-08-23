@@ -61,10 +61,12 @@ class KCard extends StatelessWidget {
   }
 
   Widget characterIcon(data) {
-    String name = data['character'].split(' ')[0].toLowerCase();
+    String name = data['character'].split(' ')[0].toLowerCase().replace(RegExp(r'é|è'), 'e');
     if ([
       'merlin',
-      'arthur'
+      'arthur',
+      'perceval',
+      'leodagan'
     ].contains(name)) {
       return Padding(
         padding: const EdgeInsets.only(left: 15.0),
