@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "820084350095",
+    "project_id": "kaamelottsoundboard",
+    "storage_bucket": "kaamelottsoundboard.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820084350095:android:f23848926ef19789bda4fa",
+        "android_client_info": {
+          "package_name": "com.atomstudios.kaamelott"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820084350095-57pdlhmts5j556bfbla3470l3hclsdl1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlK96tseM4f7Hb9J1ca01vNdRNqWXkMzE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820084350095-57pdlhmts5j556bfbla3470l3hclsdl1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

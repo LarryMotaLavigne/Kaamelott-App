@@ -2,10 +2,7 @@ stages:
   - test
   - update_build_version
   - build
-#  - test_deployment
-#  - alpha_deployment
-#  - beta_deployment
-#  - production_deployment
+  - deploy
 
 .android_key_store:
   before_script:
@@ -41,78 +38,22 @@ update_build_version:
     - sh scripts/update_version.sh update_build_version
     - sh scripts/update_version.sh commit_push_and_tag
 
-build_android_before_release:
+build:
   image: cirrusci/flutter:stable
   stage: build
-  extends: .android_key_store
   script:
-    - VERSION=$(sh update_version.sh get_version)
-    - BUILD_VERSION=$(sh update_version.sh get_build_version)
+    - VERSION=$(sh scripts/update_version.sh get_version)
+    - BUILD_VERSION=$(sh scripts/update_version.sh get_build_version)
     - flutter pub get
     - flutter build appbundle --build-number=$BUILD_VERSION --build-name=$VERSION
   artifacts:
     paths:
       - build/app/outputs/bundle/release/app-release.aab
-      - build/app/outputs/apk/release/app-release.apk
     expire_in: 1 day
-  dependencies:
-    - update_build_version
 
-#build_android:
-#  stage: build
-#  extends: .android_key_store
-#  script:
-#    - flutter pub get
-#    - flutter packages pub run flutter_launcher_icons:main
-#    - flutter build apk
-#  artifacts:
-#    paths:
-#      - build/app/outputs/apk
-#  except:
-#    - main
-#    - develop
-#
-#android_play_store_internal_deployment:
-#  stage: test_deployment
-#  extends: .setup_fastlane_android
-#  dependencies:
-#    - build_android_before_release
-#  script:
-#    - bundle exec fastlane upload_to_play_store_internal
-#    - bundle exec fastlane upload_to_firebase
-#  only:
-#    - develop
-#
-#android_play_store_alpha_deployment:
-#  stage: alpha_deployment
-#  extends: .setup_fastlane_android
-#  dependencies:
-#    - android_play_store_internal_deployment
-#  script:
-#    - bundle exec fastlane promote_internal_to_alpha
-#  when: manual
-#  only:
-#    - develop
-#
-#android_play_store_beta_deployment:
-#  stage: beta_deployment
-#  extends: .setup_fastlane_android
-#  dependencies:
-#    - build_android
-#  script:
-#    - bundle exec fastlane promote_alpha_to_beta
-#  allow_failure: false
-#  when: manual
-#  only:
-#    - main
-#
-#android_play_store_productive_deployment:
-#  stage: production_deployment
-#  extends: .setup_fastlane_android
-#  dependencies:
-#    - android_play_store_beta_deployment
-#  script: bundle exec fastlane promote_alpha_to_production
-#  allow_failure: false
-#  when: manual
-#  only:
-#    - main
+deploy:
+  image: ruby:2.7
+  stage: deploy
+  extends: .setup_fastlane_android
+  script:
+    - bundle exec fastlane deploy
