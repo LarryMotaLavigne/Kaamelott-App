@@ -6,7 +6,7 @@ stages:
 
 .android_key_store:
   before_script:
-    - echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > /builds/elevemoi/mobile/android/key.jks
+    - echo "$SIGNING_KEY" | base64 --decode > /builds/elevemoi/mobile/android/key.jks
     - echo "storePassword=$KEYSTORE_PASSWORD" >> android/signing.properties
     - echo "keyPassword=$KEY_PASSWORD" >> android/signing.properties
     - echo "keyAlias=$KEY_ALIAS" >> android/signing.properties
@@ -41,6 +41,7 @@ update_build_version:
 build:
   image: cirrusci/flutter:stable
   stage: build
+  extends: .android_key_store
   script:
     - VERSION=$(sh scripts/update_version.sh get_version)
     - BUILD_VERSION=$(sh scripts/update_version.sh get_build_version)
