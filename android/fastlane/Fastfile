@@ -1,0 +1,50 @@
+update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Submits the APK to Google Play internal testing track"
+  lane :upload_to_play_store_internal do
+    upload_to_play_store(
+      track: 'internal',
+      aab: '../build/app/outputs/bundle/release/app-release.aab',
+      json_key_data: ENV['ANDROID_API_KEY']
+    )
+  end
+
+  desc "Promote Internal to Alpha"
+  lane :promote_internal_to_alpha do
+    upload_to_play_store(
+      track: 'internal',
+      track_promote_to: 'alpha',
+      json_key_data: ENV['ANDROID_API_KEY']
+    )
+  end
+
+  desc "Promote Alpha to Beta"
+  lane :promote_alpha_to_beta do
+    upload_to_play_store(
+      track: 'alpha',
+      track_promote_to: 'beta',
+      json_key_data: ENV['ANDROID_API_KEY']
+    )
+  end
+
+  desc "Promote Alpha to Production"
+  lane :promote_alpha_to_production do
+    upload_to_play_store(
+      track: 'alpha',
+      track_promote_to: 'production',
+      json_key_data: ENV['ANDROID_API_KEY']
+    )
+  end
+
+  desc "Promote Beta to Production"
+  lane :promote_beta_to_production do
+    upload_to_play_store(
+      track: 'beta',
+      track_promote_to: 'production',
+      json_key_data: ENV['ANDROID_API_KEY']
+    )
+  end
+end
