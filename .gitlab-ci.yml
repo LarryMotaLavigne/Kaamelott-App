@@ -6,11 +6,11 @@ stages:
 
 .android_key_store:
   before_script:
-    - echo "$SIGNING_KEY" | base64 --decode > /builds/k/mobile/android/key.jks
+    - echo "$SIGNING_KEY" | base64 --decode > /builds/atomstudios/k/android/key.jks
     - echo "storePassword=$KEYSTORE_PASSWORD" >> android/signing.properties
     - echo "keyPassword=$KEY_PASSWORD" >> android/signing.properties
     - echo "keyAlias=$KEY_ALIAS" >> android/signing.properties
-    - echo "storeFile=/builds/k/mobile/android/key.jks" >> android/signing.properties
+    - echo "storeFile=/builds/atomstudios/k/android/key.jks" >> android/signing.properties
 
 .setup_fastlane_android:
   extends: .android_key_store
@@ -21,7 +21,7 @@ stages:
     - cd android/
     - gem install bundler
     - bundle install
-    - echo "$KEY_FIREBASE_APP_DISTRIBUTION" >> /builds/elevemoi/mobile/android/KEY_FIREBASE_APP_DISTRIBUTION.json
+    - echo "$KEY_FIREBASE_APP_DISTRIBUTION" >> /builds/atomstudios/k/android/KEY_FIREBASE_APP_DISTRIBUTION.json
 
 test:
   image: cirrusci/flutter:stable
