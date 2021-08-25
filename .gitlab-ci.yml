@@ -57,3 +57,5 @@ deploy:
   extends: .setup_fastlane_android
   script:
     - bundle exec fastlane deploy
+  dependencies:
+    - build
