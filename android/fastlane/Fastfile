@@ -11,7 +11,7 @@ platform :android do
             testers: "",
             release_notes: "News !",
             firebase_cli_path: "/usr/local/bin/firebase",
-            android_artifact_type: 'aab',
+            android_artifact_type: 'AAB',
             android_artifact_path: "../build/app/outputs/bundle/release/app-release.aab"
         )
     end

@@ -21,7 +21,6 @@ stages:
     - cd android/
     - gem install bundler
     - bundle install
-    - echo "$KEY_FIREBASE_APP_DISTRIBUTION" >> /builds/atomstudios/k/android/KEY_FIREBASE_APP_DISTRIBUTION.json
 
 test:
   image: cirrusci/flutter:stable
