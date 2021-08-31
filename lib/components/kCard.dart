@@ -61,7 +61,7 @@ class KCard extends StatelessWidget {
   }
 
   Widget characterIcon(data) {
-    String name = data['character'].split(' ')[0].toLowerCase().replace(RegExp(r'é|è'), 'e');
+    String name = data['character'].split(' ')[0].toLowerCase().replaceAll('é', 'e');
     if ([
       'merlin',
       'arthur',

@@ -9,7 +9,7 @@ platform :android do
             app: "1:820084350095:android:f23848926ef19789bda4fa",
             service_credentials_file: '/builds/atomstudios/k/android/app/google-services.json',
             testers: "",
-            release_notes: "News !",
+            release_notes_file: "/builds/atomstudios/k/RELEASE_NOTE.md",
             firebase_cli_path: "/usr/local/bin/firebase",
             android_artifact_type: 'AAB',
             android_artifact_path: "../build/app/outputs/bundle/release/app-release.aab"
